@@ -1,4 +1,4 @@
-#map{ height: 75%;
+#map{ height: 100%;
       width: 100%;
     }
 
@@ -16,9 +16,4 @@ body {
 
 p {
   font-size: 18;
-}
-
-h3 {
-  font-weight: normal;
-  color: #800026;
 }
