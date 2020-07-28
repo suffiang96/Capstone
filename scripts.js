@@ -39,11 +39,14 @@ document
   });
 
 
-$.getJSON("WatersEdge.json",function(watersEdge){
-  L.geoJson (watersEdge, {
- style: function(feature){
-   return { color: 'blue',
-          fillOpacity: 0.7 };
- },
+$.getJSON('Thalwaeg_All.json',function (allThalweg) {
+  L.geoJson (allThalweg, {
+    style: function(feature){
+      return {
+        color: 'blue',
+        weight: 2,
+        fillOpacity: 1,
+      }
+    }
   }).addTo(map);
 });
