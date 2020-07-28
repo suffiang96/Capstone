@@ -1,16 +1,41 @@
 var map = L.map('map').setView([47.207404, -121.507328], 11);
 
+
+$.getJSON("WatersEdge.geojson",function (waterEdge) {
+  L.geoJson (waterEdge, {
+    style: function(feature){
+      return {
+        color: 'blue',
+        fillOpacity: 0.5,
+      }
+    }
+  }).addTo(map);
+});
+
 $.getJSON("All_Thalweg.geojson",function (allThalweg) {
   L.geoJson (allThalweg, {
     style: function(feature){
       return {
-        color: 'blue',
+        color: 'green',
         weight: 2,
         fillOpacity: 1,
       }
     }
   }).addTo(map);
 });
+
+$.getJSON("WetChanXS.geojson",function (wetChan) {
+  L.geoJson (wetChan, {
+    style: function(feature){
+      return {
+        color: 'black',
+        weight: 1,
+        fillOpacity: 1,
+      }
+    }
+  }).addTo(map);
+});
+
 
 var layer = L.esri.basemapLayer('Topographic').addTo(map);
 var layerLabels;
