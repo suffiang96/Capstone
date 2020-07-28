@@ -39,16 +39,11 @@ document
   });
 
 
-$.getJSON("SideChanHab1718.json",function(sideChan){
-  L.geoJson (sideChan, {
+$.getJSON("WatersEdge.json",function(watersEdge){
+  L.geoJson (watersEdge, {
  style: function(feature){
-   return { color: 'black',
-          dashArray: '6',
-          weight: 2.5 ,
+   return { color: 'blue',
           fillOpacity: 0.7 };
  },
- onEachFeature: function( feature, layer ){
-   layer.bindPopup( feature.properties.ChannelTyp + " type channel" )
- }
   }).addTo(map);
 });
