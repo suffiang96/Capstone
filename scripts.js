@@ -39,7 +39,7 @@ document
   });
 
 
-$.getJSON('Thalwaeg_All.json',function (allThalweg) {
+$.getJSON('thalwaeg_all.geojson',function (allThalweg) {
   L.geoJson (allThalweg, {
     style: function(feature){
       return {
