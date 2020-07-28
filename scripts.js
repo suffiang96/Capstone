@@ -1,5 +1,17 @@
 var map = L.map('map').setView([47.207404, -121.507328], 11);
 
+$.getJSON("All_Thalweg.geojson",function (allThalweg) {
+  L.geoJson (allThalweg, {
+    style: function(feature){
+      return {
+        color: 'blue',
+        weight: 2,
+        fillOpacity: 1,
+      }
+    }
+  }).addTo(map);
+});
+
 var layer = L.esri.basemapLayer('Topographic').addTo(map);
 var layerLabels;
 
@@ -37,16 +49,3 @@ document
     var basemap = e.target.value;
     setBasemap(basemap);
   });
-
-
-$.getJSON('thalwaeg_all.geojson',function (allThalweg) {
-  L.geoJson (allThalweg, {
-    style: function(feature){
-      return {
-        color: 'blue',
-        weight: 2,
-        fillOpacity: 1,
-      }
-    }
-  }).addTo(map);
-});
