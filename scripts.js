@@ -1,4 +1,3 @@
-
 var map = L.map('map').setView([47.207404, -121.507328], 11);
 
 var layer = L.esri.basemapLayer('Topographic').addTo(map);
