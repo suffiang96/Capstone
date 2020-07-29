@@ -146,3 +146,6 @@ document
     var basemap = e.target.value;
     setBasemap(basemap);
   });
+
+var osmGeocoder = new L.Control.OSMGeocoder();
+map.addControl(osmGeocoder);
