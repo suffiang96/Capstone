@@ -106,7 +106,47 @@ $.getJSON("MarkedWood1718.geojson",function (mWood) {
     }).addTo(map);
 });
 
+//Engineered Log Jams
+var eljMark = {
+  radius: 5,
+  fillColor: "#331a00",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8,
+};
 
+$.getJSON("ELJs.geojson",function (eljam) {
+  L.geoJson (eljam, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, eljMark )
+  },
+      onEachFeature: function( feature, layer ){
+          layer.bindPopup( "<p>This is a " + feature.properties.JamSize + " sized jam</p>")
+      }
+    }).addTo(map);
+});
+
+//Pebble Counts
+var pebbleMark= {
+  radius: 3,
+  fillColor: "#757570",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8,
+};
+
+var pebbleCount = $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
+  L.geoJson (pebcnt, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, pebbleMark )
+  },
+      onEachFeature: function( feature, layer ){
+          layer.bindPopup( "<p>Counts for D80: " + feature.properties.D80 + " </p>")
+      }
+    }).addTo(map);
+});
 
 //Basemaps
 var layer = L.esri.basemapLayer('Topographic').addTo(map);
@@ -147,5 +187,33 @@ document
     setBasemap(basemap);
   });
 
+//Geocoder
 var osmGeocoder = new L.Control.OSMGeocoder();
 map.addControl(osmGeocoder);
+
+
+//Layer controls
+var overlays = [
+					 {
+						groupName : "Pebble Counts",
+						expanded  : true,
+						layers    : {
+							"Pebble Counts" : pebbleCount,
+						}
+					 },
+         ];
+
+      pebbleCount.StyledLayerControl = {
+     		removable : true,
+     		visible : false
+     	}
+
+var options = {
+  container_width 	: "300px",
+  container_maxHeight : "350px",
+  group_maxHeight     : "80px",
+  exclusive       	: false
+};
+
+var control = L.Control.styledLayerControl(overlays, options);
+	map.addControl(control);
