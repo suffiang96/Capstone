@@ -1,4 +1,4 @@
-var map = L.map('map').setView([47.207404, -121.507328], 11);
+var map = L.map('map').setView([47.207404, -121.507328], 11,{zoomcontrol: false});
 
 
 // water surface, light blue
@@ -383,3 +383,5 @@ var options = {
 
 var control = L.Control.styledLayerControl(overlays, options);
 	map.addControl(control);
+var zoomHome = L.Control.zoomHome();
+  zoomHome.addTo(map);
