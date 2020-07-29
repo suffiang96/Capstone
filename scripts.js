@@ -1,5 +1,6 @@
-var map = L.map('map').setView([47.207404, -121.507328], 11,{zoomcontrol: false});
-
+var map = L.map('map',{zoomControl:false}).setView([47.207404, -121.507328], 11);
+var zoomHome = L.Control.zoomHome();
+  zoomHome.addTo(map);
 
 // water surface, light blue
 var waterPoly= $.getJSON("WatersEdge.geojson",function (waterEdge) {
@@ -383,5 +384,3 @@ var options = {
 
 var control = L.Control.styledLayerControl(overlays, options);
 	map.addControl(control);
-var zoomHome = L.Control.zoomHome();
-  zoomHome.addTo(map);
