@@ -1,5 +1,7 @@
 var map = L.map('map').setView([47.207404, -121.507328], 11);
 
+
+// water surface, light blue
 var waterPoly= $.getJSON("WatersEdge.geojson",function (waterEdge) {
   L.geoJson (waterEdge, {
     style: function(feature){
@@ -12,6 +14,7 @@ var waterPoly= $.getJSON("WatersEdge.geojson",function (waterEdge) {
   }).addTo(map);
 });
 
+//Thalweg, dark blue
 var thalwegAll = $.getJSON("All_Thalweg.geojson",function (allThalweg) {
   L.geoJson (allThalweg, {
     style: function(feature){
@@ -24,11 +27,12 @@ var thalwegAll = $.getJSON("All_Thalweg.geojson",function (allThalweg) {
   }).addTo(map);
 });
 
+//wet channel xs, dark blue
 var wetChan = $.getJSON("WetChanXS.geojson",function (wetChan) {
   L.geoJson (wetChan, {
     style: function(feature){
       return {
-        color: '#400080',
+        color: '#003366',
         weight: 1,
         fillOpacity: 1,
       }
@@ -36,7 +40,41 @@ var wetChan = $.getJSON("WetChanXS.geojson",function (wetChan) {
   }).addTo(map);
 });
 
-//Style by habitat type
+//bankfull Surveys, dark blue
+var bankfull = $.getJSON("BFXS.geojson",function (bfxs) {
+  L.geoJson (bfxs, {
+    style: function(feature){
+      return {
+        color: '#003366',
+        weight: 1,
+        fillOpacity: 1,
+      }
+    }
+  }).addTo(map);
+});
+
+//Large Channel Habitat, styled by shades of blue
+var largeHab = $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
+  L.geoJson (largeChan, {
+    style: function(feature){
+      var color,
+        type = feature.properties.UnitTyp;
+      if ( type === "RI" ) color = '#668cff';
+      else if ( type === 'CA' ) color = '#1a53ff';
+      else if ( type === 'GL' ) color = '#002080';
+      else if ( type === 'RU' ) color = '#0033cc';
+      else color === '#FFFFFF';
+      return {weight: 2, color: color, fillOpacity: 1 };
+
+      },
+
+      onEachFeature: function( feature, layer ){
+        layer.bindPopup( feature.properties.UnitTyp + " type channel" )
+      }
+  }).addTo(map);
+});
+
+//SideChannel habitat, Style by habitat type gren to red
 var sideHab = $.getJSON("SideChanHab1718.geojson",function (sideChan) {
   L.geoJson (sideChan, {
     style: function(feature){
@@ -56,10 +94,31 @@ var sideHab = $.getJSON("SideChanHab1718.geojson",function (sideChan) {
   }).addTo(map);
 });
 
-//Use conditional styling to refelct size of the jam
+//BF survey points, Dark green
+var bankfullMark = {
+  radius: 3,
+  fillColor: "#006600",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8,
+};
+
+var bfPoints = $.getJSON("BFSurveyPts.geojson",function (bankXS) {
+  L.geoJson (bankXS, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, bankfullMark )
+  },
+      onEachFeature: function( feature, layer ){
+          layer.bindPopup( "<p>Canopy cover: " + feature.properties.CanopyClos + "</p>" + "<p>Bankfull width: " + feature.properties.BankfullWi + "</p>" + "<p>Wetted width: " + feature.properties.WettedWidt + "</p>")
+      }
+    }).addTo(map);
+});
+
+//Regular Jams, Use conditional styling to refelct size of the jam, default dark brown
 var defaultMark = {
   radius: 1,
-  fillColor: "#996633",
+  fillColor: "#604020",
   color: "#000",
   weight: 1,
   opacity: 1,
@@ -85,7 +144,7 @@ var regJams = $.getJSON("Jams1718.geojson",function (jams) {
       }).addTo(map);
     });
 
-//Marked Wood
+//Marked Wood, medium brown
 var wood = {
   radius: 5,
   fillColor: "#996633",
@@ -101,15 +160,15 @@ var markWood = $.getJSON("MarkedWood1718.geojson",function (mWood) {
       return L.circleMarker(latlng, wood )
   },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>This is " + feature.properties.WoodSize + " sized wood</p>")
+          layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + "</p>")
       }
     }).addTo(map);
 });
 
-//Engineered Log Jams
+//Engineered Log Jams, black, style by size eventually
 var eljMark = {
   radius: 5,
-  fillColor: "#331a00",
+  fillColor: "#000000",
   color: "#000",
   weight: 1,
   opacity: 1,
@@ -127,16 +186,35 @@ var engJams= $.getJSON("ELJs.geojson",function (eljam) {
     }).addTo(map);
 });
 
-//Pebble Counts
-var pebbleMark= {
+//ILWD, light brown
+var ilwdMark= {
   radius: 3,
-  fillColor: "#757570",
+  fillColor: "#d9b38c",
   color: "#000",
   weight: 1,
   opacity: 1,
   fillOpacity: 0.8,
 };
 
+var ilwdLayer = $.getJSON("ILWD1718.geojson",function (ilwd) {
+  L.geoJson (ilwd, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, ilwdMark )
+  },
+      onEachFeature: function( feature, layer ){
+          layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + " </p>")
+      }
+    }).addTo(map);
+});
+//Pebble Counts, dark gray
+var pebbleMark= {
+  radius: 3,
+  fillColor: "#4d4d4d",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8,
+};
 var pebbleCount = $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
   L.geoJson (pebcnt, {
     pointToLayer: function (feature, latlng) {
@@ -147,6 +225,27 @@ var pebbleCount = $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
       }
     }).addTo(map);
 });
+
+//Pools, dark blue
+var poolMark= {
+  radius: 3,
+  fillColor: "#00004d",
+  color: "#fff",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8,
+};
+var poolPoly = $.getJSON("Pools1718.geojson",function (pools1718) {
+  L.geoJson (pools1718, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, poolMark )
+  },
+      onEachFeature: function( feature, layer ){
+          layer.bindPopup( "<p>Max depth is: " + feature.properties.PoolMaxDepth + " </p>")
+      }
+    }).addTo(map);
+});
+
 
 //Basemaps
 var layer = L.esri.basemapLayer('Topographic').addTo(map);
@@ -198,17 +297,27 @@ var overlays = [
 						groupName : "Field Surveys",
 						expanded  : true,
 						layers    : {
-							"Pebble Counts" : pebbleCount,
+							"Pebble counts" : pebbleCount,
               "ELJs" : engJams,
-              "Marked Wood" : markWood,
+              "ILWD" : ilwdLayer,
+              "Marked wood" : markWood,
               "Jams" : regJams,
+              "Large channel habitat" : largeHab,
+              "Side channel habitat" : sideHab,
+              "Wet channel cross sections" : wetChan,
+              "Bankfull survey cross sections" : bankfull,
+              "Bankfull points data": bfPoints,
+              "Pools" : poolPoly,
 						}
 					 },
            {
-            groupName : "LiDAR Data",
+            groupName : "LiDAR Derived Data",
             expanded  : true,
             layers    : {
               "Water Surface" : waterPoly,
+              "River Thalweg" : thalwegAll,
+
+
             }
            },
          ];
@@ -221,6 +330,10 @@ var overlays = [
         removable: true,
         visilbe: false,
       }
+      ilwdLayer.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
       markWood.StyledLayerControl = {
         removable: true,
         visilbe: false,
@@ -229,7 +342,35 @@ var overlays = [
         removable: true,
         visilbe: false,
       }
+      largeHab.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      sideHab.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      wetChan.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      bankfull.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      bfPoints.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      poolPoly.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
       waterPoly.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      thalwegAll.StyledLayerControl = {
         removable: true,
         visilbe: false,
       }
