@@ -1,6 +1,6 @@
 var map = L.map('map').setView([47.207404, -121.507328], 11);
 
-$.getJSON("WatersEdge.geojson",function (waterEdge) {
+var waterPoly= $.getJSON("WatersEdge.geojson",function (waterEdge) {
   L.geoJson (waterEdge, {
     style: function(feature){
       return {
@@ -12,7 +12,7 @@ $.getJSON("WatersEdge.geojson",function (waterEdge) {
   }).addTo(map);
 });
 
-$.getJSON("All_Thalweg.geojson",function (allThalweg) {
+var thalwegAll = $.getJSON("All_Thalweg.geojson",function (allThalweg) {
   L.geoJson (allThalweg, {
     style: function(feature){
       return {
@@ -24,7 +24,7 @@ $.getJSON("All_Thalweg.geojson",function (allThalweg) {
   }).addTo(map);
 });
 
-$.getJSON("WetChanXS.geojson",function (wetChan) {
+var wetChan = $.getJSON("WetChanXS.geojson",function (wetChan) {
   L.geoJson (wetChan, {
     style: function(feature){
       return {
@@ -37,7 +37,7 @@ $.getJSON("WetChanXS.geojson",function (wetChan) {
 });
 
 //Style by habitat type
-$.getJSON("SideChanHab1718.geojson",function (sideChan) {
+var sideHab = $.getJSON("SideChanHab1718.geojson",function (sideChan) {
   L.geoJson (sideChan, {
     style: function(feature){
       var color,
@@ -66,7 +66,7 @@ var defaultMark = {
   fillOpacity: 0.8,
 };
 
-$.getJSON("Jams1718.geojson",function (jams) {
+var regJams = $.getJSON("Jams1718.geojson",function (jams) {
   L.geoJson (jams, {
     pointToLayer: function (feature, latlng) {
       var radius,
@@ -95,7 +95,7 @@ var wood = {
   fillOpacity: 0.8,
 };
 
-$.getJSON("MarkedWood1718.geojson",function (mWood) {
+var markWood = $.getJSON("MarkedWood1718.geojson",function (mWood) {
   L.geoJson (mWood, {
     pointToLayer: function (feature, latlng) {
       return L.circleMarker(latlng, wood )
@@ -116,7 +116,7 @@ var eljMark = {
   fillOpacity: 0.8,
 };
 
-$.getJSON("ELJs.geojson",function (eljam) {
+var engJams= $.getJSON("ELJs.geojson",function (eljam) {
   L.geoJson (eljam, {
     pointToLayer: function (feature, latlng) {
       return L.circleMarker(latlng, eljMark )
@@ -192,22 +192,47 @@ var osmGeocoder = new L.Control.OSMGeocoder();
 map.addControl(osmGeocoder);
 
 
-//Layer controls
+//Layer controls from https://github.com/davicustodio/Leaflet.StyledLayerControl
 var overlays = [
 					 {
-						groupName : "Pebble Counts",
+						groupName : "Field Surveys",
 						expanded  : true,
 						layers    : {
 							"Pebble Counts" : pebbleCount,
+              "ELJs" : engJams,
+              "Marked Wood" : markWood,
+              "Jams" : regJams,
 						}
 					 },
+           {
+            groupName : "LiDAR Data",
+            expanded  : true,
+            layers    : {
+              "Water Surface" : waterPoly,
+            }
+           },
          ];
 
       pebbleCount.StyledLayerControl = {
-     		removable : true,
-     		visible : false
+     	removable : true,
+     	visible : false,
      	}
-
+      engJams.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      markWood.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      regJams.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
+      waterPoly.StyledLayerControl = {
+        removable: true,
+        visilbe: false,
+      }
 var options = {
   container_width 	: "300px",
   container_maxHeight : "350px",
