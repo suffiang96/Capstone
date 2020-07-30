@@ -396,6 +396,5 @@ map.addControl( Legend );
 $(".legend-container").append( $("#legend") );
 $(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info-circle fa-2x' style='color: #000'></i>" );
 
-
 var control = L.Control.styledLayerControl(overlays, options);
 map.addControl(control);
