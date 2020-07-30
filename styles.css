@@ -2,6 +2,15 @@
       width: 100%;
     }
 
+#layers{
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+#charts {
+  font-family: sans-serif;
+  font-size: 18px;
+}
 body {
   margin-left: 10%;
   margin-right: 10%;
