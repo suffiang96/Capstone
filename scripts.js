@@ -220,18 +220,22 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
     layerControl.addOverlay(ilwdLayer, "Individual large woody debris")
 });
 //Pebble Counts, dark gray
-var pebbleMark= {
-  radius: 3,
-  fillColor: "#4d4d4d",
-  color: "#000",
-  weight: 1,
-  opacity: 1,
-  fillOpacity: 0.8,
-};
+// var pebbleMark= {
+//   radius: 3,
+//   fillColor: "#4d4d4d",
+//   color: "#000",
+//   weight: 1,
+//   opacity: 1,
+//   fillOpacity: 0.8,
+// };
+var myIcon = L.icon({
+    iconUrl: '<i class="fas fa-hashtag"></i>',
+
+});
 $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
   var pebbleCount = L.geoJson (pebcnt, {
     pointToLayer: function (feature, latlng) {
-      return L.circleMarker(latlng, pebbleMark )
+      return L.marker(latlng, {icon: myIcon} )
   },
       onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>Counts for D80: " + feature.properties.D80 + " </p>")

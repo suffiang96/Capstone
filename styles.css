@@ -6,7 +6,10 @@
   font-family: sans-serif;
   font-size: 20px;
 }
-
+h1 {
+  font-family: sans-serif;
+  font-size: 18px
+}
 #charts {
   font-family: sans-serif;
   font-size: 18px;
