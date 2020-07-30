@@ -384,10 +384,6 @@ var options = {
   exclusive       	: false
 };
 
-var control = L.Control.styledLayerControl(overlays, options);
-map.addControl(control);
-
-
 var Legend =  new L.Control.Legend({
         position: 'bottomright',
         collapsed: true,
@@ -399,3 +395,7 @@ map.addControl( Legend );
 
 $(".legend-container").append( $("#legend") );
 $(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info fa-2x' style='color: #000'></i>" );
+
+
+var control = L.Control.styledLayerControl(overlays, options);
+map.addControl(control);
