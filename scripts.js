@@ -227,25 +227,26 @@ var pebbleCount = $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
     }).addTo(map);
 });
 
-//Pools, dark blue
-var poolMark= {
-  radius: 3,
-  fillColor: "#00004d",
-  color: "#fff",
-  weight: 1,
-  opacity: 1,
-  fillOpacity: 0.8,
-};
+//Pools, shades of blue
 var poolPoly = $.getJSON("Pools1718.geojson",function (pools1718) {
   L.geoJson (pools1718, {
-    pointToLayer: function (feature, latlng) {
-      return L.circleMarker(latlng, poolMark )
-  },
+    style: function(feature){
+      var fillColor,
+        depth = feature.properties.PoolMaxDep;
+      if ( depth => '6' ) fillColor = '#7d8bb8';
+      else if ( depth => '12' ) fillColor = '#5265a1';
+      else if ( depth =>'20' ) fillColor = '#273f8a';
+      else fillColor === '#FFFFFF';
+      return {weight: 2, fillColor: fillColor, fillOpacity: 1 };
+
+      },
+
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>Max depth is: " + feature.properties.PoolMaxDepth + " </p>")
+        layer.bindPopup( "<p>Max depth is: " + feature.properties.PoolMaxDep + " </p>")
       }
-    }).addTo(map);
+  }).addTo(map);
 });
+
 
 
 //Basemaps
@@ -326,6 +327,7 @@ var overlays = [
       pebbleCount.StyledLayerControl = {
      	removable : true,
      	visible : false,
+
      	}
       engJams.StyledLayerControl = {
         removable: true,
@@ -383,4 +385,17 @@ var options = {
 };
 
 var control = L.Control.styledLayerControl(overlays, options);
-	map.addControl(control);
+map.addControl(control);
+
+
+var Legend =  new L.Control.Legend({
+        position: 'topleft',
+        collapsed: true,
+        controlButton: {
+            title: "Legend"
+        }
+});
+map.addControl( Legend );
+
+$(".legend-container").append( $("#legend") );
+$(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info fa-2x' style='color: #000'></i>" );
