@@ -389,7 +389,7 @@ map.addControl(control);
 
 
 var Legend =  new L.Control.Legend({
-        position: 'topleft',
+        position: 'bottomright',
         collapsed: true,
         controlButton: {
             title: "Legend"
