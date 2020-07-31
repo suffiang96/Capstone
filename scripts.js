@@ -4,22 +4,22 @@ var zoomHome = L.Control.zoomHome();
 
 
   // water surface, light blue
-  var waterPoly= L.layerGroup().addTo(map)
+var waterPoly= L.layerGroup().addTo(map)
 
-  $.getJSON("WatersEdge.geojson",function (waterEdge) {
-    L.geoJson (waterEdge, {
-      style: function(feature){
-        return {
-          color: '#3399ff',
-          fillOpacity: 0.5,
-          weight: 1,
-        }
-      },
-      onEachFeature: function (feature, layer){
-        waterPoly.addLayer(layer)
-      },
-    })
-  });
+$.getJSON("WatersEdge.geojson",function (waterEdge) {
+  L.geoJson (waterEdge, {
+    style: function(feature){
+      return {
+        color: '#3399ff',
+        fillOpacity: 0.5,
+        weight: 1,
+      }
+    },
+    onEachFeature: function (feature, layer){
+      waterPoly.addLayer(layer)
+    },
+  })
+});
 
 //Thalweg, dark blue
 var thalwegAll = L.layerGroup().addTo(map)
@@ -28,7 +28,8 @@ $.getJSON("All_Thalweg.geojson",function (allThalweg) {
     style: function(feature){
       return {
         color: '#001a33',
-        weight: 3,
+        weight: 1.5,
+        dashArray: 4,
         fillOpacity: 1,
       }
     },
@@ -85,7 +86,6 @@ $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
       else if ( type === 'RU' ) color = '#0033cc';
       else color = '#FFFFFF';
       return {weight: 2, color: color, fillOpacity: 1 };
-
       },
 
       onEachFeature: function( feature, layer ){
@@ -107,7 +107,6 @@ $.getJSON("SideChanHab1718.geojson",function (sideChan) {
       else if ( type === 'F' ) color = '#00802b';
       else color = '#FFFFFF';
       return {weight: 2, color: color, fillOpacity: 1 };
-
       },
 
       onEachFeature: function( feature, layer ){
@@ -118,8 +117,6 @@ $.getJSON("SideChanHab1718.geojson",function (sideChan) {
 });
 
 //BF survey points, Dark green
-
-
 var bfPoints = L.layerGroup()
 $.getJSON("BFSurveyPts.geojson",function (bankXS) {
   L.geoJson (bankXS, {
@@ -174,6 +171,37 @@ $.getJSON("Jams1718.geojson",function (jams) {
 
       })
     });
+var markWood = L.layerGroup()
+$.getJSON("MarkedWood1718.geojson",function (mWood) {
+  L.geoJson (mWood, {
+    pointToLayer: function (feature, latlng) {
+      var radius,
+        size = feature.properties.JamSize;
+      if ( size === "RW" ) {radius = 4}
+      else if ( size === 'ML' ) {radius = 6}
+      else if ( size === 'MLR' ) {radius = 8}
+      else if ( size === 'LL' ) {radius = 10}
+      else if ( size === 'LLR' ) {radius = 12}
+      else {radius = 2}
+
+      var wood = {
+        radius: radius,
+        fillColor: "#996633",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8,
+      };
+
+      return L.circleMarker(latlng, wood)
+    },
+      onEachFeature: function( feature, layer ){
+          layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + "</p>"+
+                          "<p>Wood orientation: " + feature.properties.WoodOrient + " </p>" )
+          markWood.addLayer(layer)
+          }
+        })
+    });
 
 //Engineered Log Jams, black, style by size eventually
 
@@ -206,40 +234,43 @@ $.getJSON("ELJs.geojson",function (eljam) {
 });
 
 //ILWD, light brown
-var ilwdMark= {
-  radius: 3,
-  fillColor: "#d9b38c",
-  color: "#000",
-  weight: 1,
-  opacity: 1,
-  fillOpacity: 0.8,
-};
 
+var ilwdLayer = L.layerGroup()
 $.getJSON("ILWD1718.geojson",function (ilwd) {
-  var ilwdLayer = L.geoJson (ilwd, {
+  L.geoJson (ilwd, {
     pointToLayer: function (feature, latlng) {
         var radius,
           size = feature.properties.WoodSize;
-        if ( size === "ML" ) radius = 4;
-        else if ( size === 'MLR' ) radius = 6;
-        else if ( size === 'KP' ) radius = 8;
-        else if ( size === 'KPR' ) radius = 10;
-        else if ( size === 'RW' ) radius = 12;
-        else if ( size === 'LL' ) radius = 14;
-        else if ( size === 'LLR' ) radius = 16;
-        else radius = 2;
+        if ( size === "ML" ) {radius = 4}
+        else if ( size === 'MLR' ) {radius = 6}
+        else if ( size === 'KP' ) {radius = 8}
+        else if ( size === 'KPR' ) {radius = 10}
+        else if ( size === 'RW' ) {radius = 12}
+        else if ( size === 'LL' ) {radius = 14}
+        else if ( size === 'LLR' ) {radius = 16}
+        else {radius = 2};
 
-        return L.circleMarker(latlng, radius, ilwdMark)
+        var ilwdMark= {
+          radius: radius,
+          fillColor: "#d9b38c",
+          color: "#000",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.8,
+        };
+        return L.circleMarker(latlng, ilwdMark)
       },
       onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + " </p>" +
                            "<p>Wood orientation: " + feature.properties.WoodOrientation + " </p>")
+          ilwdLayer.addLayer(layer)
       }
-    })//.addTo(map);
+    })
 });
 
 //Thanks to fontawesome
-var pebbleCount = $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
+var pebbleCount = L.layerGroup()
+$.getJSON("PebbleCount1718.geojson",function (pebcnt) {
   L.geoJson (pebcnt, {
     pointToLayer: function (feature, latlng) {
       var myIcon = L.icon({
@@ -253,12 +284,13 @@ var pebbleCount = $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
           layer.bindPopup( "<p>Counts for D16: " + feature.properties.D16 + " </p>" +
                            "<p>Counts for D50: " + feature.properties.D50 + " </p>" +
                            "<p>Counts for D84: " + feature.properties.D84 + " </p>" )
+          pebbleCount.addLayer(layer)
       }
-    })//.addTo(map);
+    })
 });
 
 //Pools, shades of blue
-var poolPoly = L.layerGroup().addTo(map)
+var poolPoly = L.layerGroup()
 $.getJSON("Pools1718.geojson",function (pools1718) {
   L.geoJson (pools1718, {
     style: function(feature){
@@ -410,7 +442,7 @@ var overlays = [
       thalwegAll.StyledLayerControl = {
         removable: false,
         visilbe: false,
-      };
+      }
 
 var options = {
   container_width 	: "300px",
@@ -419,5 +451,17 @@ var options = {
   exclusive       	: false
 };
 
+var Legend =  new L.Control.Legend({
+        position: 'bottomleft',
+        collapsed: true,
+        controlButton: {
+            title: "Legend"
+        }
+});
+
+map.addControl(Legend);
+
+$(".legend-container").append( $("#legend") );
+$(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info-circle fa-2x' style='color: #000'></i>" );
 var control = L.Control.styledLayerControl(null, overlays, options);
 	map.addControl(control);
