@@ -350,6 +350,7 @@ document
 var osmGeocoder = new L.Control.OSMGeocoder();
 map.addControl(osmGeocoder);
 
+// styled layer control options
 var overlays = [
          {
           groupName : "Lidar",
@@ -366,18 +367,33 @@ var options = {
   exclusive       	: false
 };
 
+// legeng from https://codepen.io/haakseth/pen/KQbjdO
+var legend = L.control({ position: "bottomright"});
 
-var Legend =  new L.Control.Legend({
-        position: 'bottomleft',
-        collapsed: true,
-        controlButton: {
-            title: "Legend"
-        }
-});
-map.addControl( Legend );
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Legend</h4>";
+  div.innerHTML += '<i style="background: #3399ff"></i><span>Water surface</span><br>';
+  div.innerHTML += '<i style="background: #448D40"></i><span>Thalweg</span><br>';
+  div.innerHTML += '<i style="background: #E6E696"></i><span>Wet channel cross sections</span><br>';
+  div.innerHTML += '<i style="background: #E8E6E0"></i><span>Bankfull cross sections</span><br>';
+  div.innerHTML += '<i style="background: #FFFFFF"></i><span>Large channel habitat</span><br>';
+  div.innerHTML += '<i style="background: #FFFFFF"></i><span>Side channel habitat</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Bankfull survey points</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Jams</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Marked wood</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>ELJs</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>ILWD</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Pebble count</span><br>';
+  div.innerHTML += '<i style="background: #FFFFFF"></i><span>Pools</span><br>';
 
-$(".legend-container").append( $("#legend") );
-$(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info-circle fa-2x' style='color: #000'></i>" );
+
+
+
+  return div;
+};
+
+legend.addTo(map);
 
 //Layer controls from https://github.com/davicustodio/Leaflet.StyledLayerControl
 var control = L.Control.styledLayerControl(null, overlays, options);
