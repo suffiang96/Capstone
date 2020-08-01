@@ -11,6 +11,7 @@ $.getJSON("WatersEdge.geojson",function (waterEdge) {
     style: function(feature){
       return {
         color: '#3399ff',
+        fillColor:"#3399ff",
         fillOpacity: 0.5,
         weight: 1,
       }
@@ -296,11 +297,11 @@ $.getJSON("Pools1718.geojson",function (pools1718) {
     style: function(feature){
       var fillColor,
         depth = feature.properties.PoolMaxDep;
-      if ( depth >= '6' ) fillColor = '#7d8bb8';
-      else if ( depth >= '12' ) fillColor = '#5265a1';
-      else if ( depth >='20' ) fillColor = '#273f8a';
-      else fillColor >= '#FFFFFF';
-      return {weight: 2, fillColor: fillColor, fillOpacity: 1 };
+      if ( depth <= '6' ) fillColor = '#80b3ff';
+      else if ( depth <= '12' ) fillColor = '#0066ff';
+      else if ( depth <='20' ) fillColor = '#002966';
+      else fillColor = '#FFFFFF';
+      return {weight: 1, fillColor: fillColor, fillOpacity: 1, color: fillColor};
       },
       onEachFeature: function( feature, layer ){
         layer.bindPopup( "<p>Max depth: " + feature.properties.PoolMaxDep + " </p>" +
@@ -359,7 +360,6 @@ document
 var osmGeocoder = new L.Control.OSMGeocoder();
 map.addControl(osmGeocoder);
 
-// legeng from https://codepen.io/haakseth/pen/KQbjdO
 
 //Layer controls from https://github.com/davicustodio/Leaflet.StyledLayerControl
 var overlays = [
@@ -367,7 +367,7 @@ var overlays = [
 						groupName : "Field Surveys",
 						expanded  : true,
 						layers    : {
-							"Pebble counts" : pebbleCount,
+              "Pools" : poolPoly,
               "ELJs" : engJams,
               "ILWD" : ilwdLayer,
               "Marked wood" : markWood,
@@ -377,7 +377,7 @@ var overlays = [
               "Wet channel cross sections" : wetChannel,
               "Bankfull survey cross sections" : bankfull,
               "Bankfull points data": bfPoints,
-              "Pools" : poolPoly,
+              "Pebble counts" : pebbleCount,
 						}
 					 },
            {
@@ -453,15 +453,18 @@ var options = {
 
 var Legend =  new L.Control.Legend({
         position: 'bottomleft',
-        collapsed: true,
+        collapsed: false,
         controlButton: {
             title: "Legend"
         }
 });
 
+
+// legend
 map.addControl(Legend);
 
 $(".legend-container").append( $("#legend") );
 $(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info-circle fa-2x' style='color: #000'></i>" );
+
 var control = L.Control.styledLayerControl(null, overlays, options);
 	map.addControl(control);
