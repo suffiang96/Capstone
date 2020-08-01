@@ -2,16 +2,16 @@
       width: 100%;
     }
 
-#title{ text-align: center;
 
-}
+
 h1 {
   font-family: sans-serif;
-  font-size: 28px
+  font-size: 28px;
+  text-align: center;
 }
 h2{
   font-family: sans-serif;
-  font-size: 24px
+  font-size: 22px
 }
 h3 {
   font-family: sans-serif;

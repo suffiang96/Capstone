@@ -150,9 +150,9 @@ $.getJSON("Jams1718.geojson",function (jams) {
     pointToLayer: function (feature, latlng) {
       var radius;
         var size = feature.properties.JamSize;
-          if ( size === "Small" ) {radius = 5}
-          else if ( size === 'Medium' ) {radius = 10}
-          else if ( size === 'Large' ) {radius = 15}
+          if ( size === "Small" ) {radius = 2}
+          else if ( size === 'Medium' ) {radius = 4}
+          else if ( size === 'Large' ) {radius = 6}
           else {radius = 1};
 
       var defaultMark = {
@@ -178,11 +178,11 @@ $.getJSON("MarkedWood1718.geojson",function (mWood) {
     pointToLayer: function (feature, latlng) {
       var radius,
         size = feature.properties.JamSize;
-      if ( size === "RW" ) {radius = 4}
-      else if ( size === 'ML' ) {radius = 6}
-      else if ( size === 'MLR' ) {radius = 8}
-      else if ( size === 'LL' ) {radius = 10}
-      else if ( size === 'LLR' ) {radius = 12}
+      if ( size === "RW" ) {radius = 2}
+      else if ( size === 'ML' ) {radius = 4}
+      else if ( size === 'MLR' ) {radius = 6}
+      else if ( size === 'LL' ) {radius = 8}
+      else if ( size === 'LLR' ) {radius = 10}
       else {radius = 2}
 
       var wood = {
@@ -242,14 +242,14 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
     pointToLayer: function (feature, latlng) {
         var radius,
           size = feature.properties.WoodSize;
-        if ( size === "ML" ) {radius = 4}
-        else if ( size === 'MLR' ) {radius = 6}
-        else if ( size === 'KP' ) {radius = 8}
-        else if ( size === 'KPR' ) {radius = 10}
-        else if ( size === 'RW' ) {radius = 12}
-        else if ( size === 'LL' ) {radius = 14}
-        else if ( size === 'LLR' ) {radius = 16}
-        else {radius = 2};
+        if ( size === "ML" ) {radius = 2}
+        else if ( size === 'MLR' ) {radius = 3}
+        else if ( size === 'KP' ) {radius = 4}
+        else if ( size === 'KPR' ) {radius = 5}
+        else if ( size === 'RW' ) {radius = 6}
+        else if ( size === 'LL' ) {radius = 7}
+        else if ( size === 'LLR' ) {radius = 8}
+        else {radius = 1};
 
         var ilwdMark= {
           radius: radius,
