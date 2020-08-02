@@ -148,22 +148,21 @@ var regJams = L.layerGroup()
 $.getJSON("Jams1718.geojson",function (jams) {
   L.geoJson (jams, {
     pointToLayer: function (feature, latlng) {
-      var radius;
+      var iconSize;
         var size = feature.properties.JamSize;
-          if ( size === "Small" ) {radius = 2}
-          else if ( size === 'Medium' ) {radius = 4}
-          else if ( size === 'Large' ) {radius = 6}
-          else {radius = 1};
+          if ( size === "Small" ) {iconSize = [15,25]}
+          else if ( size === 'Medium' ) {iconSize = [20,30]}
+          else if ( size === 'Large' ) {iconSize = [25,35]}
+          else {iconSize = [10,20]};
 
-      var defaultMark = {
-        radius: radius,
-        fillColor: "#604020",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8,
+      var myIcon = {
+        color: "#604020",
+        iconUrl: 'asterisk-solid.svg',
+        iconSize: iconSize,
+        popupAnchor: [-3, -10],
+
       };
-      return L.circleMarker(latlng, defaultMark)
+      return L.marker(latlng, {icon: myIcon} )
     },
     onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>This is a " + feature.properties.JamSize + " sized jam</p>" + "<p>It is a " + feature.properties.JamType + " type of jam</p>")
