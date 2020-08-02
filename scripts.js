@@ -1,3 +1,4 @@
+//icons from FONT AWESOME https://fontawesome.com/
 var map = L.map('map',{zoomControl:false}).setView([47.207404, -121.507328], 11);
 var zoomHome = L.Control.zoomHome();
   zoomHome.addTo(map);
@@ -150,25 +151,23 @@ $.getJSON("Jams1718.geojson",function (jams) {
     pointToLayer: function (feature, latlng) {
       var iconSize;
         var size = feature.properties.JamSize;
-          if ( size === "Small" ) {iconSize = [15,25]}
-          else if ( size === 'Medium' ) {iconSize = [20,30]}
-          else if ( size === 'Large' ) {iconSize = [25,35]}
-          else {iconSize = [10,20]};
+          if ( size === "Small" ) {iconSize = [8,18]}
+          else if ( size === 'Medium' ) {iconSize = [10,20]}
+          else if ( size === 'Large' ) {iconSize = [12,22]}
+          else {iconSize = [6,16]};
 
-      var myIcon = {
-        color: "#604020",
+      var myIcon = L.icon({
         iconUrl: 'asterisk-solid.svg',
         iconSize: iconSize,
         popupAnchor: [-3, -10],
 
-      };
-      return L.marker(latlng, {icon: myIcon} )
+      });
+      return L.marker(latlng, {icon: myIcon})
     },
     onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>This is a " + feature.properties.JamSize + " sized jam</p>" + "<p>It is a " + feature.properties.JamType + " type of jam</p>")
           regJams.addLayer(layer)
         },
-
       })
     });
 var markWood = L.layerGroup()
