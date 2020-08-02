@@ -176,12 +176,12 @@ $.getJSON("MarkedWood1718.geojson",function (mWood) {
     pointToLayer: function (feature, latlng) {
       var radius,
         size = feature.properties.JamSize;
-      if ( size === "RW" ) {iconSize = [6,16]}
-      else if ( size === 'ML' ) {iconSize = [8,18]}
-      else if ( size === 'MLR' ) {iconSize = [10,20]}
-      else if ( size === 'LL' ) {iconSize = [12,22]}
-      else if ( size === 'LLR' ) {iconSize = [14,24]}
-      else {iconSize = [4,14]}
+      if ( size === "RW" ) {iconSize = [10,20]}
+      else if ( size === 'ML' ) {iconSize = [12,22]}
+      else if ( size === 'MLR' ) {iconSize = [14,24]}
+      else if ( size === 'LL' ) {iconSize = [16,26]}
+      else if ( size === 'LLR' ) {iconSize = [18,28]}
+      else {iconSize = [10,20]}
 
       var myIcon = L.icon({
         iconUrl: 'asterisk-solid.svg',
@@ -207,10 +207,10 @@ $.getJSON("ELJs.geojson",function (eljam) {
     pointToLayer: function (feature, latlng) {
       var radius;
        var size = feature.properties.JamSize;
-      if ( size === "Small" ) {iconSize = [8,18]}
-      else if ( size === 'Medium' ) {iconSize = [10,20]}
-      else if ( size === 'Large' ) {iconSize = [12,22]}
-      else {iconSize = [6,16]};
+      if ( size === "Small" ) {iconSize = [10,20]}
+      else if ( size === 'Medium' ) {iconSize = [12,22]}
+      else if ( size === 'Large' ) {iconSize = [14,24]}
+      else {iconSize = [10,20]};
 
       var myIcon = L.icon({
         iconUrl: 'bahai-solid.svg',
@@ -235,24 +235,22 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
     pointToLayer: function (feature, latlng) {
         var radius,
           size = feature.properties.WoodSize;
-        if ( size === "ML" ) {radius = 2}
-        else if ( size === 'MLR' ) {radius = 3}
-        else if ( size === 'KP' ) {radius = 4}
-        else if ( size === 'KPR' ) {radius = 5}
-        else if ( size === 'RW' ) {radius = 6}
-        else if ( size === 'LL' ) {radius = 7}
-        else if ( size === 'LLR' ) {radius = 8}
-        else {radius = 1};
+        if ( size === "ML" )  {iconSize = [10,20]}
+        else if ( size === 'MLR' )  {iconSize = [12,22]}
+        else if ( size === 'KP' )  {iconSize = [14,24]}
+        else if ( size === 'KPR' )  {iconSize = [16,26]}
+        else if ( size === 'RW' ) {iconSize = [18,28]}
+        else if ( size === 'LL' )  {iconSize = [20,30]}
+        else if ( size === 'LLR' )  {iconSize = [22,32]}
+        else  {iconSize = [10,20]};
 
-        var ilwdMark= {
-          radius: radius,
-          fillColor: "#d9b38c",
-          color: "#000",
-          weight: 1,
-          opacity: 1,
-          fillOpacity: 0.8,
-        };
-        return L.circleMarker(latlng, ilwdMark)
+        var myIcon = L.icon({
+          iconUrl: 'diaspora-solid.svg',
+          iconSize: iconSize,
+          popupAnchor: [-3, -10],
+
+        });
+        return L.marker(latlng, {icon: myIcon})
       },
       onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + " </p>" +
