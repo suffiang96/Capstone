@@ -157,7 +157,7 @@ $.getJSON("Jams1718.geojson",function (jams) {
           else {iconSize = [6,16]};
 
       var myIcon = L.icon({
-        iconUrl: 'asterisk-solid.svg',
+        iconUrl: 'certificate-solid.svg',
         iconSize: iconSize,
         popupAnchor: [-3, -10],
 
@@ -176,23 +176,20 @@ $.getJSON("MarkedWood1718.geojson",function (mWood) {
     pointToLayer: function (feature, latlng) {
       var radius,
         size = feature.properties.JamSize;
-      if ( size === "RW" ) {radius = 2}
-      else if ( size === 'ML' ) {radius = 4}
-      else if ( size === 'MLR' ) {radius = 6}
-      else if ( size === 'LL' ) {radius = 8}
-      else if ( size === 'LLR' ) {radius = 10}
-      else {radius = 2}
+      if ( size === "RW" ) {iconSize = [6,16]}
+      else if ( size === 'ML' ) {iconSize = [8,18]}
+      else if ( size === 'MLR' ) {iconSize = [10,20]}
+      else if ( size === 'LL' ) {iconSize = [12,22]}
+      else if ( size === 'LLR' ) {iconSize = [14,24]}
+      else {iconSize = [4,14]}
 
-      var wood = {
-        radius: radius,
-        fillColor: "#996633",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8,
-      };
+      var myIcon = L.icon({
+        iconUrl: 'asterisk-solid.svg',
+        iconSize: iconSize,
+        popupAnchor: [-3, -10],
 
-      return L.circleMarker(latlng, wood)
+      });
+      return L.marker(latlng, {icon: myIcon})
     },
       onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + "</p>"+
@@ -210,20 +207,18 @@ $.getJSON("ELJs.geojson",function (eljam) {
     pointToLayer: function (feature, latlng) {
       var radius;
        var size = feature.properties.JamSize;
-      if ( size === "Small" ) {radius = 4}
-      else if ( size === 'Medium' ) {radius = 6}
-      else if ( size === 'Large' ) {radius = 8}
-      else {radius = 2};
+      if ( size === "Small" ) {iconSize = [8,18]}
+      else if ( size === 'Medium' ) {iconSize = [10,20]}
+      else if ( size === 'Large' ) {iconSize = [12,22]}
+      else {iconSize = [6,16]};
 
-      var eljMark = {
-        radius: radius,
-        fillColor: "#000000",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8,
-      };
-      return L.circleMarker(latlng, eljMark)
+      var myIcon = L.icon({
+        iconUrl: 'bahai-solid.svg',
+        iconSize: iconSize,
+        popupAnchor: [-3, -10],
+
+      });
+      return L.marker(latlng, {icon: myIcon})
   },
       onEachFeature: function( feature, layer ){
           layer.bindPopup( "<p>Jam size: " + feature.properties.JamSize + "</p>")
