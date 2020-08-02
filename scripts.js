@@ -281,7 +281,7 @@ $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
     })
 });
 
-//Pools, shades of blue
+//Pools, purple
 var poolPoly = L.layerGroup()
 $.getJSON("Pools1718.geojson",function (pools1718) {
   L.geoJson (pools1718, {
@@ -358,7 +358,7 @@ var overlays = [
 						groupName : "Field Surveys",
 						expanded  : true,
 						layers    : {
-              "Pools" : poolPoly,
+              "Pools " : poolPoly,
               "ELJs" : engJams,
               "ILWD" : ilwdLayer,
               "Marked wood" : markWood,
