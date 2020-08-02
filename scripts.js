@@ -245,7 +245,7 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
         else  {iconSize = [10,20]};
 
         var myIcon = L.icon({
-          iconUrl: 'diaspora-solid.svg',
+          iconUrl: 'diaspora-brands.svg',
           iconSize: iconSize,
           popupAnchor: [-3, -10],
 
