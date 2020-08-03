@@ -102,13 +102,13 @@ var sideHab = L.layerGroup()
 $.getJSON("SideChanHab1718.geojson",function (sideChan) {
   L.geoJson (sideChan, {
     style: function(feature){
-      var color,
+      var dashArray,
         type = feature.properties.ChannelTyp;
-      if ( type === "D" ) color = '#990000';
-      else if ( type === 'I' ) color = '#e68a00';
-      else if ( type === 'F' ) color = '#00802b';
+      if ( type === "D" ) dashArray = '0';
+      else if ( type === 'I' ) dashArray = '4';
+      else if ( type === 'F' ) dashArray = '1';
       else color = '#FFFFFF';
-      return {weight: 2, color: color, fillOpacity: 1 };
+      return {weight: 2, color: 'black', fillOpacity: 1, dashArray: dashArray };
       },
 
       onEachFeature: function( feature, layer ){
