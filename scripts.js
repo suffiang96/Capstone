@@ -31,7 +31,6 @@ $.getJSON("All_Thalweg.geojson",function (allThalweg) {
       return {
         color: '#001a33',
         weight: 1.5,
-        dashArray: 4,
         fillOpacity: 1,
       }
     },
@@ -81,13 +80,13 @@ $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
   L.geoJson (largeChan, {
     style: function(feature){
       var color,
-        type = feature.properties.UnitTyp;
+        type = feature.properties.UnitType;
       if ( type === "RI" ) color = '#668cff';
       else if ( type === 'CA' ) color = '#1a53ff';
       else if ( type === 'GL' ) color = '#002080';
       else if ( type === 'RU' ) color = '#0033cc';
       else color = '#FFFFFF';
-      return {weight: 2, color: color, fillOpacity: 1 };
+      return {weight: 3, color: color, fillOpacity: 1 };
       },
 
       onEachFeature: function( feature, layer ){
@@ -104,11 +103,11 @@ $.getJSON("SideChanHab1718.geojson",function (sideChan) {
     style: function(feature){
       var dashArray,
         type = feature.properties.ChannelTyp;
-      if ( type === "D" ) dashArray = '0';
-      else if ( type === 'I' ) dashArray = '4';
+      if ( type === "D" ) dashArray = '5';
+      else if ( type === 'I' ) dashArray = '4, 1, 4';
       else if ( type === 'F' ) dashArray = '1';
       else color = '#FFFFFF';
-      return {weight: 2, color: 'black', fillOpacity: 1, dashArray: dashArray };
+      return {weight: 2, color: 'gray', fillOpacity: 1, dashArray: dashArray };
       },
 
       onEachFeature: function( feature, layer ){

@@ -2,7 +2,17 @@
       width: 100%;
     }
 
-
+#title{
+     text-align: center;
+     font-weight: bold;
+     font-family: sans-serif;
+     font-size: 30px;
+    }
+#subtitle {
+      font-family: sans-serif;
+      font-size: 16;
+      text-align: center;
+    }
 
 h1 {
   font-family: sans-serif;
@@ -17,6 +27,9 @@ h3 {
   font-family: sans-serif;
   font-size: 20px
 }
+p {
+  font-family: sans-serif;
+}
 #charts {
   font-family: sans-serif;
   font-size: 18px;
@@ -28,14 +41,8 @@ body {
   margin-bottom: 5%;
   background-color: #D5CECC;
 }
- p2 {
-   font-size: 12;
- }
 
-p {
-  font-family: sans-serif;
-  font-size: 16;
-}
+
 
 #basemaps-wrapper {
   position: absolute;
@@ -49,10 +56,7 @@ p {
   margin-bottom: 5px;
 }
 
-#title{
-  text-align: center;
-  font-weight: bold;
-}
+
 #legend {
       width: 100%;
       font: 12px Arial, sans-serif;
