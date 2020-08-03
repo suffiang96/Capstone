@@ -358,13 +358,13 @@ var overlays = [
 						groupName : "Field Surveys",
 						expanded  : true,
 						layers    : {
-              "Pools " : poolPoly,
-              "ELJs" : engJams,
-              "ILWD" : ilwdLayer,
-              "Marked wood" : markWood,
-              "Jams" : regJams,
               "Large channel habitat" : largeHab,
               "Side channel habitat" : sideHab,
+              "Pools " : poolPoly,
+              "ELJs" : engJams,
+              "Jams" : regJams,
+              "ILWD" : ilwdLayer,
+              "Marked wood" : markWood,
               "Wet channel cross sections" : wetChannel,
               "Bankfull survey cross sections" : bankfull,
               "Bankfull points data": bfPoints,
@@ -444,7 +444,7 @@ var options = {
 
 var Legend =  new L.Control.Legend({
         position: 'bottomleft',
-        collapsed: false,
+        collapsed: true,
         controlButton: {
             title: "Legend"
         }

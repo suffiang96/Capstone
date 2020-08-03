@@ -49,9 +49,16 @@ p {
   margin-bottom: 5px;
 }
 
-
+#title{
+  text-align: center;
+  font-weight: bold;
+}
 #legend {
-      width:250px;
-      font: 12px Arial, Helvetica, sans-serif;
+      width: 100%;
+      font: 12px Arial, sans-serif;
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-top: 5%;
+      padding-bottom: 5%;
 
       }
