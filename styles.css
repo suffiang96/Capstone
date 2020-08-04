@@ -56,8 +56,12 @@ body {
   margin-bottom: 5px;
 }
 
-
-#legend {
+#Ltitle{
+     text-align: center;
+     font-weight: bold;
+     font-family: sans-serif;
+     font-size: 14px;
+    }#legend {
       width: 100%;
       font: 12px Arial, sans-serif;
       padding-left: 5%;

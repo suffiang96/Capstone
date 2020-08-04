@@ -46,8 +46,8 @@ $.getJSON("WetChanXS.geojson",function (wetChan) {
   L.geoJson (wetChan, {
     style: function(feature){
       return {
-        color: '#003366',
-        weight: 1,
+        color: 'purple',
+        weight: 1.5,
         fillOpacity: 1,
       }
     },
@@ -63,8 +63,8 @@ $.getJSON("BFXS.geojson",function (bfxs) {
   L.geoJson (bfxs, {
     style: function(feature){
       return {
-        color: '#003366',
-        weight: 1,
+        color: 'red',
+        weight: 1.5,
         fillOpacity: 1,
       }
     },
@@ -90,7 +90,7 @@ $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
       },
 
       onEachFeature: function( feature, layer ){
-        layer.bindPopup( "This is a: " + feature.properties.UnitType )
+        layer.bindPopup( "<b> Unit type:</b> " + feature.properties.UnitType )
         largeHab.addLayer(layer)
       }
   })
@@ -111,7 +111,7 @@ $.getJSON("SideChanHab1718.geojson",function (sideChan) {
       },
 
       onEachFeature: function( feature, layer ){
-        layer.bindPopup( feature.properties.ChannelTyp + " type channel" )
+        layer.bindPopup( "<b>Channel type:</b> " + feature.properties.ChannelTyp  )
         sideHab.addLayer(layer)
       }
   })
@@ -134,10 +134,10 @@ $.getJSON("BFSurveyPts.geojson",function (bankXS) {
       return L.circleMarker(latlng, bankfullMark )
   },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>Bankfull width: " + feature.properties.BankfullWi + "</p>" +
-                           "<p>Bankfull width: " + feature.properties.BankfullWi + "</p>" +
-                           "<p>Wetted width: " + feature.properties.WettedWidt + "</p>" +
-                           "<p>Canopy cover: " + feature.properties.CanopyClos + "</p>" )
+          layer.bindPopup( "<p><b>Bankfull width: </b>" + feature.properties.BankfullWi + "</p>" +
+                           "<p><b>Bankfull width: </b>" + feature.properties.BankfullWi + "</p>" +
+                           "<p><b>Wetted width: </b>" + feature.properties.WettedWidt + "</p>" +
+                           "<p><b>Canopy cover: </b>" + feature.properties.CanopyClos + "</p>" )
           bfPoints.addLayer(layer)
       }
     })
@@ -164,7 +164,7 @@ $.getJSON("Jams1718.geojson",function (jams) {
       return L.marker(latlng, {icon: myIcon})
     },
     onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>This is a " + feature.properties.JamSize + " sized jam</p>" + "<p>It is a " + feature.properties.JamType + " type of jam</p>")
+          layer.bindPopup( "<b>Jam size: </b>" + feature.properties.JamSize + "<br>" + "<b>Jam type:</b> " + feature.properties.JamType )
           regJams.addLayer(layer)
         },
       })
@@ -191,8 +191,8 @@ $.getJSON("MarkedWood1718.geojson",function (mWood) {
       return L.marker(latlng, {icon: myIcon})
     },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + "</p>"+
-                          "<p>Wood orientation: " + feature.properties.WoodOrient + " </p>" )
+          layer.bindPopup( "<b>Wood size: </b>" + feature.properties.WoodSize + "<br>"+
+                          "<b>Wood orientation: </b>" + feature.properties.WoodOrient  )
           markWood.addLayer(layer)
           }
         })
@@ -220,7 +220,7 @@ $.getJSON("ELJs.geojson",function (eljam) {
       return L.marker(latlng, {icon: myIcon})
   },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>Jam size: " + feature.properties.JamSize + "</p>")
+          layer.bindPopup( "<b>Jam size: </b>" + feature.properties.JamSize )
           engJams.addLayer(layer)
       }
     })
@@ -252,8 +252,8 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
         return L.marker(latlng, {icon: myIcon})
       },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>Wood size: " + feature.properties.WoodSize + " </p>" +
-                           "<p>Wood orientation: " + feature.properties.WoodOrientation + " </p>")
+          layer.bindPopup( "<b>Wood size: </b>" + feature.properties.WoodSize + " <br>" +
+                           "<b>Wood orientation: </b>" + feature.properties.WoodOrientation )
           ilwdLayer.addLayer(layer)
       }
     })
@@ -272,9 +272,9 @@ $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
       return L.marker(latlng, {icon: myIcon} )
   },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p>Counts for D16: " + feature.properties.D16 + " </p>" +
-                           "<p>Counts for D50: " + feature.properties.D50 + " </p>" +
-                           "<p>Counts for D84: " + feature.properties.D84 + " </p>" )
+          layer.bindPopup( "<b>Counts for D16: </b>" + feature.properties.D16 + " </p>" +
+                           "<b>Counts for D50: </b>" + feature.properties.D50 + " </p>" +
+                           "<b>Counts for D84: </b>" + feature.properties.D84 + " </p>" )
           pebbleCount.addLayer(layer)
       }
     })
@@ -294,12 +294,12 @@ $.getJSON("Pools1718.geojson",function (pools1718) {
       return {weight: 1, fillColor: fillColor, fillOpacity: 1, color: fillColor};
       },
       onEachFeature: function( feature, layer ){
-        layer.bindPopup( "<p>Max depth: " + feature.properties.PoolMaxDep + " </p>" +
-                         "<p>Residual depth: " + feature.properties.PoolResidu + " </p>" +
-                         "<p>Pool type: " + feature.properties.PoolType + " </p>" +
-                         "<p>Pool formation: " + feature.properties.PoolFormin + " </p>" +
-                         "<p>Pool area: " + feature.properties.Shape_Area + " </p>" +
-                         "<p>Graveltail? : " + feature.properties.GravelTail + " </p>" )
+        layer.bindPopup( "<b>Max depth: <b/>" + feature.properties.PoolMaxDep + "<br>" +
+                         "<b>Residual depth: <b/>" + feature.properties.PoolResidu + "<br>"+
+                         "<b>Pool type: <b/>" + feature.properties.PoolType + "<br>" +
+                         "<b>Pool formation: <b/>" + feature.properties.PoolFormin + " <br>" +
+                         "<b>Pool area: <b/>" + feature.properties.Shape_Area + " <br>" +
+                         "<b>Graveltail? : <b/>" + feature.properties.GravelTail + " <br>" )
         poolPoly.addLayer(layer)
       }
   })
