@@ -435,14 +435,14 @@ var overlays = [
       }
 
 var options = {
-  container_width 	: "300px",
+  container_width 	: "100%",
   container_maxHeight : "350px",
   group_maxHeight     : "80px",
   exclusive       	: false
 };
 
 var Legend =  new L.Control.Legend({
-        position: 'bottomleft',
+        position: 'bottomright',
         collapsed: true,
         controlButton: {
             title: "Legend"

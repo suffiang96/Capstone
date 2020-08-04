@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Capstone</title>
+    <title>Upper Green River Habitat Visualization</title>
 
     	<meta charset="utf-8" />
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,11 +29,11 @@
     <script src="styledLayerControl.js"></script>
     <script src="leaflet.zoomhome.min.js"></script>
     <script src="leaflet-legend.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+    <div id= "title"> Upper Green River Habitat Visualization </div>
   </head>
  <body>
-<div id= "title"> Upper Green River Habitat Visualization </div>
 <div id="subtitle"> All the habitat information in one place </div>
 <br>
 	  <div id="map"></div>
@@ -51,10 +51,11 @@
         <option value="ShadedRelief">Shaded Relief</option>
         <option value="Physical">Physical</option>
       </select>
+      Select basemap
     </div>
     <div id="legend">
     <div id="Ltitle" > Legend  </div>
-<br>
+
         <svg width="30" height="15" xmlns="http://www.w3.org/2000/svg">
         <rect width="100" height="100" fill="#3399ff" fill-opacity="0.8"/>
         </svg>
@@ -150,10 +151,6 @@
 
 <div id= "layers">
   <h2>Field Survey Layers</h2>
-  <h3> Water surface</h3>
-  <p>description</p>
-  <h3> Thalweg</h3>
-  <p>description</p>
   <h3> Large channel habitat</h3>
   <p>description</p>
   <h3> Side channel habitat</h3>
@@ -177,9 +174,17 @@
   <h3> Pebble counts</h3>
   <p>description</p>
 
+<br>
+
+<h2>LiDAR Derived Layers</h2>
+<h3> Water surface</h3>
+<p>description</p>
+<h3> Thalweg</h3>
+<p>description</p>
+
 </div>
 
-<div id= "charts">
+
   This is where i will include charts and describe results.
-</div>
+
 </html>
