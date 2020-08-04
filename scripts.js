@@ -6,7 +6,6 @@ var zoomHome = L.Control.zoomHome();
 
   // water surface, light blue
 var waterPoly= L.layerGroup().addTo(map)
-
 $.getJSON("WatersEdge.geojson",function (waterEdge) {
   L.geoJson (waterEdge, {
     style: function(feature){
@@ -40,13 +39,108 @@ $.getJSON("All_Thalweg.geojson",function (allThalweg) {
   })
 });
 
+//GR thalweg
+var thalwegGR = L.layerGroup()
+$.getJSON("ThalGR.json",function (grThalweg) {
+  L.geoJson (grThalweg, {
+    style: function(feature){
+      return {
+        color: '#001a33',
+        weight: 2,
+        fillOpacity: 1,
+      }
+    },
+    onEachFeature: function (feature, layer){
+        thalwegGR.addLayer(layer)
+    },
+  })
+});
+//Smay thalweg
+var thalwegSmay = L.layerGroup()
+$.getJSON("ThalSmay.json",function (smayThalweg) {
+  L.geoJson (smayThalweg, {
+    style: function(feature){
+      return {
+        color: '#001a33',
+        weight: 1.5,
+        fillOpacity: 1,
+      }
+    },
+    onEachFeature: function (feature, layer){
+        thalwegSmay.addLayer(layer)
+    },
+  })
+});
+
+//Sunday thalweg
+var thalwegSun = L.layerGroup()
+$.getJSON("ThalSunday.json",function (sunThalweg) {
+  L.geoJson (sunThalweg, {
+    style: function(feature){
+      return {
+        color: '#001a33',
+        weight: 1.5,
+        fillOpacity: 1,
+      }
+    },
+    onEachFeature: function (feature, layer){
+        thalwegSun.addLayer(layer)
+    },
+  })
+});
+
+//StrmNW,
+var strmNW = L.layerGroup()
+$.getJSON("StrmNW (4).json",function (strm) {
+  L.geoJson (strm, {
+    style: function(feature){
+      return {
+        weight: 1,
+        color: "#99d6ff",
+        fillOpacity: 1,
+      }
+    },
+      onEachFeature: function( feature, layer ){
+        layer.bindPopup( "<b> Unit type:</b> " + feature.properties.UnitType )
+        strmNW.addLayer(layer)
+      },
+  })
+});
+
+//major strm
+var majStrm = L.layerGroup()
+$.getJSON("MajorStrmNW.json",function (strmMaj) {
+  L.geoJson (strmMaj, {
+    style: function(feature){
+      var color,
+        slope = feature.properties.SlopeAngela;
+      if ( slope <= "0" ) color = '#004d00';
+      else if ( slope <= '0.5' ) color = '#009933';
+      else if ( slope <= '1' ) color = '#669900';
+      else if ( slope <= '1.5' ) color = '#cccc00';
+      else if ( slope <= '2' ) color = '#ffff00';
+      else if ( slope <= '2.5' ) color = ' #ffcc00';
+      else if ( slope <= '3' ) color = '#e68a00';
+      else if ( slope <= '3.5' ) color = '#cc6600';
+      else if ( slope <= '4' ) color = '#cc3300';
+      else color = '#FFFFFF';
+
+      return {weight: 3, color: color, fillOpacity: 1 };
+      },
+      onEachFeature: function( feature, layer ){
+        layer.bindPopup( "<b> Slope:</b> " + feature.properties.SlopeAngela )
+        majStrm.addLayer(layer)
+      },
+  })
+});
+
 //wet channel xs, dark blue
 var wetChannel = L.layerGroup()
 $.getJSON("WetChanXS.geojson",function (wetChan) {
   L.geoJson (wetChan, {
     style: function(feature){
       return {
-        color: 'purple',
+        color: '#6600cc',
         weight: 1.5,
         fillOpacity: 1,
       }
@@ -63,7 +157,7 @@ $.getJSON("BFXS.geojson",function (bfxs) {
   L.geoJson (bfxs, {
     style: function(feature){
       return {
-        color: 'red',
+        color: '#663300',
         weight: 1.5,
         fillOpacity: 1,
       }
@@ -266,7 +360,7 @@ $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
     pointToLayer: function (feature, latlng) {
       var myIcon = L.icon({
           iconUrl: 'hashtag-solid.svg',
-          iconSize: [15, 25],
+          iconSize: [12, 22],
           popupAnchor: [-3, -10],
       });
       return L.marker(latlng, {icon: myIcon} )
@@ -305,6 +399,48 @@ $.getJSON("Pools1718.geojson",function (pools1718) {
   })
 });
 
+//Powerlines
+var powerLines= L.layerGroup()
+$.getJSON("TransLinesWS.json",function (pLines) {
+  L.geoJson (pLines, {
+    style: function(feature){
+      return {
+        color: 'yellow',
+        weight: 1,
+        opacity: 0.4,
+      }
+    },
+    onEachFeature: function (feature, layer){
+      layer.bindPopup( "<b>Owner: </b>" + feature.properties.OWNER + " </p>" )
+
+        powerLines.addLayer(layer)
+    },
+  })
+});
+
+//Raillines
+var railLines= L.layerGroup()
+$.getJSON("RailWS.json",function (rLines) {
+  L.geoJson (rLines, {
+    style: function(feature){
+      var color,
+        type = feature.properties.Status;
+      if ( type === "Abandoned" ) color = 'gray';
+      else if ( type === 'Active' ) color = 'black';
+      return {
+        color: color,
+        weight: 1,
+        opacity: 1,
+        dashArray: 2,
+      }
+    },
+    onEachFeature: function (feature, layer){
+      layer.bindPopup( "<b>Owner: </b>" + feature.properties.RailOwner + " </p>" )
+
+        railLines.addLayer(layer)
+    },
+  })
+});
 
 
 //Basemaps
@@ -376,6 +512,19 @@ var overlays = [
             layers    : {
               "Water Surface" : waterPoly,
               "River Thalweg" : thalwegAll,
+              "Green River Thalweg": thalwegGR,
+              "Smay Creek Thalweg" : thalwegSmay,
+              "Sunday Creek Thalweg" : thalwegSun,
+              "Stream network" : strmNW,
+              "Major stream network" : majStrm
+            }
+           },
+           {
+            groupName : "Structural Layers",
+            expanded  : false,
+            layers    : {
+              "Power lines" : powerLines,
+              "Rail lines" : railLines,
             }
            },
          ];
@@ -430,6 +579,35 @@ var overlays = [
         visilbe: false,
       }
       thalwegAll.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+
+      thalwegGR.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+      thalwegSmay.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+      thalwegSun.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+      strmNW.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+      majStrm.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+      railLines.StyledLayerControl = {
+        removable: false,
+        visilbe: false,
+      }
+      powerLines.StyledLayerControl = {
         removable: false,
         visilbe: false,
       }
