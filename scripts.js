@@ -379,14 +379,13 @@ var poolPoly = L.layerGroup()
 $.getJSON("Pools1718.geojson",function (pools1718) {
   L.geoJson (pools1718, {
     style: function(feature){
-      var fillColor,
-        depth = feature.properties.PoolMaxDep;
-      if ( depth <= '6' ) fillColor = '#80b3ff';
-      else if ( depth <= '12' ) fillColor = '#0066ff';
-      else if ( depth <='20' ) fillColor = '#002966';
-      else fillColor = '#FFFFFF';
-      return {weight: 1, fillColor: fillColor, fillOpacity: 1, color: fillColor};
-      },
+      return {
+        weight: 1,
+        fillColor: '#002966',
+        fillOpacity: 1,
+        color: '#002966'
+      }
+    },
       onEachFeature: function( feature, layer ){
         layer.bindPopup( "<b>Max depth: <b/>" + feature.properties.PoolMaxDep + "<br>" +
                          "<b>Residual depth: <b/>" + feature.properties.PoolResidu + "<br>"+
