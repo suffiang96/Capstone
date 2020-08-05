@@ -173,10 +173,12 @@ $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
     style: function(feature){
       var color,
         type = feature.properties.UnitType;
-      if ( type === "RI" ) color = '#0000ff';
-      else if ( type === 'CA' ) color = '#e68a00';
-      else if ( type === 'GL' ) color = '#009999';
-      else if ( type === 'RU' ) color = '#9900ff';
+      if ( type === "RI" ) color = '#ff6600';
+      else if ( type === 'CA' ) color = '#0000ff';
+      else if ( type === 'GL' ) color = '#008000';
+      else if ( type === 'RU' ) color = '#9900cc';
+      else if ( type === 'LA' ) color = '#86592d';
+      else if ( type === 'CU' ) color = '#737373';
       else color = '#FFFFFF';
       return {weight: 2.5, color: color, fillOpacity: 1 };
       },
@@ -373,9 +375,9 @@ $.getJSON("Pools1718.geojson",function (pools1718) {
     style: function(feature){
       return {
         weight: 1,
-        fillColor: '#002966',
+        fillColor: '#000066',
         fillOpacity: 1,
-        color: '#002966'
+        color: '#000066'
       }
     },
       onEachFeature: function( feature, layer ){
