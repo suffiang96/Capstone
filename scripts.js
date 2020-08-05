@@ -13,7 +13,7 @@ $.getJSON("WatersEdge.geojson",function (waterEdge) {
         color: '#3399ff',
         fillColor:"#3399ff",
         fillOpacity: 0.5,
-        weight: 1,
+        weight: 0.5,
       }
     },
     onEachFeature: function (feature, layer){
@@ -71,7 +71,6 @@ $.getJSON("ThalSmay.json",function (smayThalweg) {
     },
   })
 });
-
 //Sunday thalweg
 var thalwegSun = L.layerGroup()
 $.getJSON("ThalSunday.json",function (sunThalweg) {
@@ -106,7 +105,6 @@ $.getJSON("StrmNW (4).json",function (strm) {
       },
   })
 });
-
 //major strm
 var majStrm = L.layerGroup()
 $.getJSON("MajorStrmNW.json",function (strmMaj) {
@@ -134,14 +132,14 @@ $.getJSON("MajorStrmNW.json",function (strmMaj) {
   })
 });
 
-//wet channel xs, dark blue
+//wet channel xs, purple
 var wetChannel = L.layerGroup()
 $.getJSON("WetChanXS.geojson",function (wetChan) {
   L.geoJson (wetChan, {
     style: function(feature){
       return {
         color: '#6600cc',
-        weight: 1.5,
+        weight: 2,
         fillOpacity: 1,
       }
     },
@@ -151,14 +149,14 @@ $.getJSON("WetChanXS.geojson",function (wetChan) {
   })
 });
 
-//bankfull Surveys, dark blue
+//bankfull Surveys, green
 var bankfull = L.layerGroup()
 $.getJSON("BFXS.geojson",function (bfxs) {
   L.geoJson (bfxs, {
     style: function(feature){
       return {
-        color: '#663300',
-        weight: 1.5,
+        color: '#003300',
+        weight: 2,
         fillOpacity: 1,
       }
     },
@@ -168,19 +166,19 @@ $.getJSON("BFXS.geojson",function (bfxs) {
   })
 });
 
-//Large Channel Habitat, styled by shades of blue
+//Large Channel Habitat, rainbow
 var largeHab = L.layerGroup()
 $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
   L.geoJson (largeChan, {
     style: function(feature){
       var color,
         type = feature.properties.UnitType;
-      if ( type === "RI" ) color = '#668cff';
-      else if ( type === 'CA' ) color = '#1a53ff';
-      else if ( type === 'GL' ) color = '#002080';
-      else if ( type === 'RU' ) color = '#0033cc';
+      if ( type === "RI" ) color = '#0000ff';
+      else if ( type === 'CA' ) color = '#e68a00';
+      else if ( type === 'GL' ) color = '#009999';
+      else if ( type === 'RU' ) color = '#9900ff';
       else color = '#FFFFFF';
-      return {weight: 3, color: color, fillOpacity: 1 };
+      return {weight: 2.5, color: color, fillOpacity: 1 };
       },
 
       onEachFeature: function( feature, layer ){
@@ -236,7 +234,6 @@ $.getJSON("BFSurveyPts.geojson",function (bankXS) {
       }
     })
 });
-
 //Regular Jams, Use conditional styling to refelct size of the jam, default dark brown
 var regJams = L.layerGroup()
 $.getJSON("Jams1718.geojson",function (jams) {
@@ -263,6 +260,7 @@ $.getJSON("Jams1718.geojson",function (jams) {
         },
       })
     });
+//marked wood
 var markWood = L.layerGroup()
 $.getJSON("MarkedWood1718.geojson",function (mWood) {
   L.geoJson (mWood, {
@@ -291,9 +289,7 @@ $.getJSON("MarkedWood1718.geojson",function (mWood) {
           }
         })
     });
-
 //Engineered Log Jams, black, style by size eventually
-
 var engJams =  L.layerGroup()
 $.getJSON("ELJs.geojson",function (eljam) {
   L.geoJson (eljam, {
@@ -319,9 +315,7 @@ $.getJSON("ELJs.geojson",function (eljam) {
       }
     })
 });
-
 //ILWD, light brown
-
 var ilwdLayer = L.layerGroup()
 $.getJSON("ILWD1718.geojson",function (ilwd) {
   L.geoJson (ilwd, {
@@ -352,7 +346,6 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
       }
     })
 });
-
 //Thanks to fontawesome
 var pebbleCount = L.layerGroup()
 $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
@@ -373,8 +366,7 @@ $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
       }
     })
 });
-
-//Pools, purple
+//Pools, dep blue
 var poolPoly = L.layerGroup()
 $.getJSON("Pools1718.geojson",function (pools1718) {
   L.geoJson (pools1718, {
@@ -398,14 +390,14 @@ $.getJSON("Pools1718.geojson",function (pools1718) {
   })
 });
 
-//Powerlines
+//Powerlines, yellow
 var powerLines= L.layerGroup()
 $.getJSON("TransLinesWS.json",function (pLines) {
   L.geoJson (pLines, {
     style: function(feature){
       return {
-        color: 'yellow',
-        weight: 1,
+        color: '#cccc00',
+        weight: 1.5,
         opacity: 0.4,
       }
     },
@@ -428,9 +420,9 @@ $.getJSON("RailWS.json",function (rLines) {
       else if ( type === 'Active' ) color = 'black';
       return {
         color: color,
-        weight: 1,
+        weight: 2,
         opacity: 1,
-        dashArray: 2,
+        dashArray: 2.5,
       }
     },
     onEachFeature: function (feature, layer){
