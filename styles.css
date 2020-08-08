@@ -75,7 +75,7 @@ body {
   font-weight: 200;
 }
 
-#Ltitle{
+.Ltitle{
   text-align: center;
   font-weight: bold;
   font-family: sans-serif;
@@ -95,6 +95,6 @@ body {
   float: left;
   width: 50%;
   background-color: #FFF;
-  border-radius: 5px;
+  border-radius: 5px
 
 }
