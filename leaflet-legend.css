@@ -1,4 +1,4 @@
-.legend-container #legend {
+.legend-container #column1 {
   background-color: rgba(255, 255, 255, 1.0);
 }
 
@@ -14,7 +14,7 @@
   /*optionally use an icon image for the toggle button*/
   /*background: url('images/layers.png') no-repeat center center;*/
 }
-.legend-collapsed #legend {
+.legend-collapsed #column1{
   display: none;
 }
 .legend-collapsed .legend-toggle {
