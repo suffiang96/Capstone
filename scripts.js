@@ -113,14 +113,10 @@ $.getJSON("MajorStrmNW.json",function (strmMaj) {
       var color,
         slope = feature.properties.SlopeAngela;
       if ( slope <= "0" ) color = '#004d00';
-      else if ( slope <= '0.5' ) color = '#009933';
-      else if ( slope <= '1' ) color = '#669900';
-      else if ( slope <= '1.5' ) color = '#cccc00';
-      else if ( slope <= '2' ) color = '#ffff00';
-      else if ( slope <= '2.5' ) color = ' #ffcc00';
-      else if ( slope <= '3' ) color = '#e68a00';
-      else if ( slope <= '3.5' ) color = '#cc6600';
-      else if ( slope <= '4' ) color = '#cc3300';
+      else if ( slope <= '3' ) color = '#228b22';
+      else if ( slope <= '6' ) color = '#ffff00';
+      else if ( slope <= '13' ) color = '#e68a00';
+      else if ( slope >= '13' ) color = '#cc3300';
       else color = '#FFFFFF';
 
       return {weight: 3, color: color, fillOpacity: 1 };
