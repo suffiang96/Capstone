@@ -349,7 +349,7 @@ $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
     pointToLayer: function (feature, latlng) {
       var myIcon = L.icon({
           iconUrl: 'hashtag-solid.svg',
-          iconSize: [12, 22],
+          iconSize: [10, 20],
           popupAnchor: [-3, -10],
       });
       return L.marker(latlng, {icon: myIcon} )
