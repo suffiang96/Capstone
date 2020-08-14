@@ -119,7 +119,7 @@ $.getJSON("MajorStrmNW.json",function (strmMaj) {
       else if ( slope >= '13' ) color = '#cc3300';
       else color = '#FFFFFF';
 
-      return {weight: 3, color: color, fillOpacity: 1 };
+      return {weight: 2, color: color, fillOpacity: 1 };
       },
       onEachFeature: function( feature, layer ){
         layer.bindPopup( "<b> Slope:</b> " + feature.properties.SlopeAngela )
