@@ -173,8 +173,6 @@ $.getJSON("LargeChanHab1718.geojson",function (largeChan) {
       else if ( type === 'CA' ) color = '#0000ff';
       else if ( type === 'GL' ) color = '#008000';
       else if ( type === 'RU' ) color = '#9900cc';
-      else if ( type === 'LA' ) color = '#86592d';
-      else if ( type === 'CU' ) color = '#737373';
       else color = '#FFFFFF';
       return {weight: 2.5, color: color, fillOpacity: 1 };
       },
