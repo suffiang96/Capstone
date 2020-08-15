@@ -318,13 +318,13 @@ $.getJSON("ILWD1718.geojson",function (ilwd) {
     pointToLayer: function (feature, latlng) {
         var radius,
           size = feature.properties.WoodSize;
-        if ( size === "ML" )  {iconSize = [10,20]}
+        if ( size === "ML" )  {iconSize = [12,22]}
         else if ( size === 'MLR' )  {iconSize = [12,22]}
         else if ( size === 'KP' )  {iconSize = [14,24]}
-        else if ( size === 'KPR' )  {iconSize = [16,26]}
-        else if ( size === 'RW' ) {iconSize = [18,28]}
-        else if ( size === 'LL' )  {iconSize = [20,30]}
-        else if ( size === 'LLR' )  {iconSize = [22,32]}
+        else if ( size === 'KPR' )  {iconSize = [14,24]}
+        else if ( size === 'RW' ) {iconSize = [10,20]}
+        else if ( size === 'LL' )  {iconSize = [16,26]}
+        else if ( size === 'LLR' )  {iconSize = [16,26]}
         else  {iconSize = [10,20]};
 
         var myIcon = L.icon({
