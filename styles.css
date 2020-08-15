@@ -115,21 +115,15 @@ ul {
   font-family: sans-serif;
   font-weight: 200;
   font-size: 10px;
-  background: rgba(255, 255, 255, 0.8)
+  background: rgba(255, 255, 255, 0.9)
 }
 
 .leaflet-popup-content-wrapper .leaflet-popup-content {
-  font-family: sans-serif;
-  font-weight: 200;
-  font-size: 10px;
-  background: rgba(255, 255, 255, 0.8)
+
 }
 
 .leaflet-popup-tip-container {
-  font-family: sans-serif;
-  font-weight: 200;
-  font-size: 10px;
-  background: rgba(255, 255, 255, 0.8)
+
 }
 
 
