@@ -122,7 +122,7 @@ $.getJSON("MajorStrmNW.json",function (strmMaj) {
       return {weight: 2, color: color, fillOpacity: 1 };
       },
       onEachFeature: function( feature, layer ){
-        layer.bindPopup( "<b> Slope:</b> " + feature.properties.SlopeAngela )
+        layer.bindPopup( "<b> Slope:</b> " + feature.properties.SlopeAngela + "%" )
         majStrm.addLayer(layer)
       },
   })
@@ -222,10 +222,10 @@ $.getJSON("BFSurveyPts.geojson",function (bankXS) {
       return L.circleMarker(latlng, bankfullMark )
   },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<p><b>Bankfull width: </b>" + feature.properties.BankfullWi + "</p>" +
-                           "<p><b>Bankfull width: </b>" + feature.properties.BankfullWi + "</p>" +
-                           "<p><b>Wetted width: </b>" + feature.properties.WettedWidt + "</p>" +
-                           "<p><b>Canopy cover: </b>" + feature.properties.CanopyClos + "</p>" )
+          layer.bindPopup( "<b>Bankfull width: </b>" + feature.properties.BankfullWi + "<br>" +
+                           "<b>Bankfull width: </b>" + feature.properties.BankfullWi + "<br>" +
+                           "<b>Wetted width: </b>" + feature.properties.WettedWidt  + "<br>" +
+                           "<b>Canopy cover: </b>" + feature.properties.CanopyClos  )
           bfPoints.addLayer(layer)
       }
     })
@@ -355,9 +355,9 @@ $.getJSON("PebbleCount1718.geojson",function (pebcnt) {
       return L.marker(latlng, {icon: myIcon} )
   },
       onEachFeature: function( feature, layer ){
-          layer.bindPopup( "<b>Counts for D16: </b>" + feature.properties.D16 + " </p>" +
-                           "<b>Counts for D50: </b>" + feature.properties.D50 + " </p>" +
-                           "<b>Counts for D84: </b>" + feature.properties.D84 + " </p>" )
+          layer.bindPopup( "<b>Counts for D16: </b>" + feature.properties.D16 + " <br>" +
+                           "<b>Counts for D50: </b>" + feature.properties.D50 + " <br>" +
+                           "<b>Counts for D84: </b>" + feature.properties.D84 + " <br>" )
           pebbleCount.addLayer(layer)
       }
     })
